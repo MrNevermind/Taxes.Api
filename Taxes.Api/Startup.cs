@@ -21,7 +21,7 @@ namespace Taxes.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = "Server=tcp:edvinas.database.windows.net,1433;Initial Catalog=Taxes;Persist Security Info=False;User ID=edvinas;Password=SL4pt4z0d1$;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            var connectionString = "Server=tcp:edvinas.database.windows.net,1433;Initial Catalog=Taxes;Persist Security Info=False;User ID=edvinas;Password=N+,j7\"4rdTTY3~~a; MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             services.AddDbContext<TaxesContext>(options => options.UseSqlServer(connectionString));
 
             services.AddControllers();

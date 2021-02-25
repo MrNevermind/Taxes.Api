@@ -19,7 +19,7 @@ namespace Taxes.Core
 
         public static TaxesContext CreateContext()
         {
-            return new TaxesContext("Server=tcp:edvinas.database.windows.net,1433;Initial Catalog=Taxes;Persist Security Info=False;User ID=edvinas;Password=SL4pt4z0d1$;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            return new TaxesContext("Server=tcp:edvinas.database.windows.net,1433;Initial Catalog=Taxes;Persist Security Info=False;User ID=edvinas;Password=N+,j7\"4rdTTY3~~a; MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
