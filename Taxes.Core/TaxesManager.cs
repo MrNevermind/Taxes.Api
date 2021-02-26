@@ -39,13 +39,7 @@ namespace Taxes.Core
         }
         public string AddTax(Tax tax)
         {
-            List<string> errors = new List<string>();
-            if (String.IsNullOrWhiteSpace(tax.Municipality))
-                errors.Add("Tax.Municipality value is missing");
-            if (tax.Value <= 0)
-                errors.Add("Tax.Value value must be greater than zero");
-            if (tax.TaxStart == DateTime.MinValue)
-                errors.Add("Tax.TaxStart value is missing");
+            var errors = tax.Validate();
 
             if(!errors.Any())
             {
