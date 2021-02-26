@@ -23,7 +23,7 @@ namespace Taxes.Api
         {
             var connectionString = "Server=tcp:edvinas.database.windows.net,1433;Initial Catalog=Taxes;Persist Security Info=False;User ID=edvinas;Password=N+,j7\"4rdTTY3~~a; MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             services.AddDbContext<TaxesContext>(options => options.UseSqlServer(connectionString));
-
+            services.AddScoped<IValidator, TaxValidator>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

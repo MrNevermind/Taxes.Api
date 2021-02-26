@@ -4,9 +4,13 @@ using System.Text;
 
 namespace Taxes.Core
 {
-    public static class TaxValidation
+    public interface IValidator
     {
-        public static List<string> Validate(this Library.Tax tax)
+        List<string> Validate(Library.Tax tax);
+    }
+    public class TaxValidator : IValidator
+    {
+        public List<string> Validate(Library.Tax tax)
         {
             List<string> errors = new List<string>();
             if (String.IsNullOrWhiteSpace(tax.Municipality))
