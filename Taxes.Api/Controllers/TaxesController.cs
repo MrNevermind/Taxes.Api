@@ -16,9 +16,9 @@ namespace Taxes.Api.Controllers
             TaxesManager = new TaxesManager(context);
         }
 
-        // Returns an array of taxes for specified municipality and day
+        // Returns tax specified municipality and day
         [HttpGet("{municipality}/{date}")]
-        public IEnumerable<decimal> GetTaxes(string municipality, DateTime date)
+        public decimal GetTaxes(string municipality, DateTime date)
         {
             return TaxesManager.GetTaxes(municipality, date);
         }

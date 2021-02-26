@@ -16,45 +16,38 @@ namespace Taxes.Tests
         }
 
         [Test]
-        public void GetTaxesTestExists()
+        public void TestTaskTaxRowOne()
         {
-            var taxes = manager.GetTaxes("Vilnius", DateTime.Parse("2021-11-21"));
-            Assert.IsTrue(taxes.Count() > 0);
+            decimal tax = manager.GetTaxes("Copenhagen", DateTime.Parse("2020-01-01"));
+            Assert.IsTrue(tax == 0.1m);
+        }
+        [Test]
+        public void TestTaskTaxRowTwo()
+        {
+            decimal tax = manager.GetTaxes("Copenhagen", DateTime.Parse("2020-05-02"));
+            Assert.IsTrue(tax == 0.4m);
+        }
+        [Test]
+        public void TestTaskTaxRowThree()
+        {
+            decimal tax = manager.GetTaxes("Copenhagen", DateTime.Parse("2020-07-10"));
+            Assert.IsTrue(tax == 0.2m);
+        }
+        [Test]
+        public void TestTaskTaxRowFour()
+        {
+            decimal tax = manager.GetTaxes("Copenhagen", DateTime.Parse("2020-03-16"));
+            Assert.IsTrue(tax == 0.2m);
         }
 
         [Test]
-        public void GetTaxesTestDoesntExist()
+        public void TestTaxCreateAndGet()
         {
-            var taxes = manager.GetTaxes(Guid.NewGuid().ToString(), DateTime.Parse("2021-11-21"));
-            Assert.IsTrue(taxes.Count() == 0);
+            string municName = Guid.NewGuid().ToString();
+            manager.AddTax(new Library.Tax() { Municipality = municName, TaxStart = DateTime.Parse("1991-07-01"), TaxEnd = DateTime.Parse("1991-07-31"), Value = 0.6m});
+            decimal tax = manager.GetTaxes(municName, DateTime.Parse("1991-07-06"));
+            Assert.IsTrue(tax == 0.6m);
         }
 
-        [Test]
-        public void AddTaxForADay()
-        {
-            int taxesBefore = manager.GetTaxes("FROM_TEST", DateTime.Parse("1991-07-06")).Count();
-            manager.AddTax(new Library.Tax() {
-                Municipality = "FROM_TEST",
-                Value = 0.6m,
-                TaxStart = DateTime.Parse("1991-07-06")
-            });
-            int taxesAfter = manager.GetTaxes("FROM_TEST", DateTime.Parse("1991-07-06")).Count();
-            Assert.IsTrue(taxesBefore == taxesAfter - 1);
-        }
-
-        [Test]
-        public void AddTaxForARange()
-        {
-            int taxesBefore = manager.GetTaxes("FROM_TEST", DateTime.Parse("1991-07-06")).Count();
-            manager.AddTax(new Library.Tax()
-            {
-                Municipality = "FROM_TEST",
-                Value = 0.6m,
-                TaxStart = DateTime.Parse("1991-07-01"),
-                TaxEnd = DateTime.Parse("1991-07-31")
-            });
-            int taxesAfter = manager.GetTaxes("FROM_TEST", DateTime.Parse("1991-07-06")).Count();
-            Assert.IsTrue(taxesBefore == taxesAfter - 1);
-        }
     }
 }

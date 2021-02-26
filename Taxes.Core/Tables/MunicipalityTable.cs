@@ -1,18 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 
 namespace Taxes.Core.Tables
 {
-    [Table("Tax")]
-    public class TaxTable
+    [Table("Municipality")]
+    public class MunicipalityTable
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public int MunicipalityId { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
-        public decimal Value { get; set; }
+
+        [MaxLength(50)]
+        public string Name { get; set; }
     }
 }

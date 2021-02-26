@@ -6,9 +6,15 @@ namespace Taxes.Core
     public class TaxesContext : DbContext
     {
         public DbSet<TaxTable> Taxes { get; set; }
+        public DbSet<MunicipalityTable> Municipalities { get; set; }
 
         public const string DefaultSchema = "dbo";
         private readonly string connectionString;
+
+        public TaxesContext()
+        {
+            this.connectionString = "Server=tcp:edvinas.database.windows.net,1433;Initial Catalog=Taxes;Persist Security Info=False;User ID=edvinas;Password=N+,j7\"4rdTTY3~~a; MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        }
 
         public TaxesContext(string connectionString)
         {
@@ -33,7 +39,7 @@ namespace Taxes.Core
         {
             modelBuilder.HasDefaultSchema(DefaultSchema);
 
-            modelBuilder.Entity<TaxTable>().HasIndex(x => x.Municipality);
+            modelBuilder.Entity<TaxTable>().HasIndex(x => x.MunicipalityId);
             modelBuilder.Entity<TaxTable>().HasIndex(x => x.StartDate);
             modelBuilder.Entity<TaxTable>().HasIndex(x => x.EndDate);
 
