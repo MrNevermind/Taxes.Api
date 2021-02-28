@@ -17,7 +17,7 @@ namespace Taxes.Core
             this.validator = validator;
         }
 
-        public decimal GetTaxes(string municipality, DateTime date)
+        public decimal? GetTaxes(string municipality, DateTime date)
         {
             var taxes = context.Taxes
                 .Join(
@@ -36,8 +36,10 @@ namespace Taxes.Core
 
             if (taxes.Any(t => !t.EndDate.HasValue))
                 return taxes.Where(t => !t.EndDate.HasValue).Max(t => t.TaxValue);
-            else
+            else if (taxes.Any())
                 return taxes.Max(t => t.TaxValue);
+            else
+                return null;
         }
         public string AddTax(Tax tax)
         {

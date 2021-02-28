@@ -20,25 +20,25 @@ namespace Taxes.Tests
         [Test]
         public void TestTaskTaxRowOne()
         {
-            decimal tax = manager.GetTaxes("Copenhagen", DateTime.Parse("2020-01-01"));
+            decimal? tax = manager.GetTaxes("Copenhagen", DateTime.Parse("2020-01-01"));
             Assert.IsTrue(tax == 0.1m);
         }
         [Test]
         public void TestTaskTaxRowTwo()
         {
-            decimal tax = manager.GetTaxes("Copenhagen", DateTime.Parse("2020-05-02"));
+            decimal? tax = manager.GetTaxes("Copenhagen", DateTime.Parse("2020-05-02"));
             Assert.IsTrue(tax == 0.4m);
         }
         [Test]
         public void TestTaskTaxRowThree()
         {
-            decimal tax = manager.GetTaxes("Copenhagen", DateTime.Parse("2020-07-10"));
+            decimal? tax = manager.GetTaxes("Copenhagen", DateTime.Parse("2020-07-10"));
             Assert.IsTrue(tax == 0.2m);
         }
         [Test]
         public void TestTaskTaxRowFour()
         {
-            decimal tax = manager.GetTaxes("Copenhagen", DateTime.Parse("2020-03-16"));
+            decimal? tax = manager.GetTaxes("Copenhagen", DateTime.Parse("2020-03-16"));
             Assert.IsTrue(tax == 0.2m);
         }
 
@@ -47,9 +47,16 @@ namespace Taxes.Tests
         {
             string municName = Guid.NewGuid().ToString();
             manager.AddTax(new Library.Tax() { Municipality = municName, TaxStart = DateTime.Parse("1991-07-01"), TaxEnd = DateTime.Parse("1991-07-31"), Value = 0.6m});
-            decimal tax = manager.GetTaxes(municName, DateTime.Parse("1991-07-06"));
+            decimal? tax = manager.GetTaxes(municName, DateTime.Parse("1991-07-06"));
             Assert.IsTrue(tax == 0.6m);
         }
 
+        [Test]
+        public void TestTaxGetNonExisting()
+        {
+            string municName = Guid.NewGuid().ToString();
+            decimal? tax = manager.GetTaxes(municName, DateTime.Parse("1991-07-06"));
+            Assert.IsTrue(tax == null);
+        }
     }
 }

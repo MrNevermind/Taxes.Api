@@ -20,7 +20,7 @@ namespace Taxes.Api.Controllers
 
         // Returns tax specified municipality and day
         [HttpGet("{municipality}/{date}")]
-        public decimal GetTaxes(string municipality, DateTime date)
+        public decimal? GetTaxes(string municipality, DateTime date)
         {
             return TaxesManager.GetTaxes(municipality, date);
         }
