@@ -2,6 +2,8 @@
 
 namespace Taxes.Api.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class StatusController : Controller
     {
         [HttpGet]
