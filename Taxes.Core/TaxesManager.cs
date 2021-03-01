@@ -29,7 +29,7 @@ namespace Taxes.Core
                         EndDate = tax.EndDate
                     }
                 )
-                .Where(t => t.MunicipalityName == municipality && t.StartDate <= date && ((t.EndDate.HasValue && date <= t.EndDate.Value) || (!t.EndDate.HasValue && date == t.StartDate)))
+                .Where(t => t.MunicipalityName.ToLower() == municipality.ToLower() && t.StartDate <= date && ((t.EndDate.HasValue && date <= t.EndDate.Value) || (!t.EndDate.HasValue && date == t.StartDate)))
                 .ToArray();
 
             if (taxes.Any(t => !t.EndDate.HasValue))
