@@ -12,9 +12,7 @@ namespace Taxes.Tests
         public void Setup()
         {
             Settings.ConnectionString = "Server=tcp:edvinas.database.windows.net,1433;Initial Catalog=Taxes;Persist Security Info=False;User ID=edvinas;Password=N+,j7\"4rdTTY3~~a; MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            TaxesContext context = TaxesContext.CreateContext();
-            IValidator validator = new TaxValidator();
-            manager = new TaxesManager(context, validator);
+            manager = new TaxesManager(TaxesContext.CreateContext());
         }
 
         [Test]

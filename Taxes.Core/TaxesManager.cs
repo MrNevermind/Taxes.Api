@@ -9,12 +9,10 @@ namespace Taxes.Core
     public class TaxesManager
     {
         TaxesContext context;
-        private readonly IValidator validator;
 
-        public TaxesManager(TaxesContext context, IValidator validator)
+        public TaxesManager(TaxesContext context)
         {
             this.context = context;
-            this.validator = validator;
         }
 
         public decimal? GetTaxes(string municipality, DateTime date)
@@ -43,7 +41,7 @@ namespace Taxes.Core
         }
         public string AddTax(Tax tax)
         {
-            var errors = validator.Validate(tax);
+            var errors = tax.Validate();
 
             if(!errors.Any())
             {

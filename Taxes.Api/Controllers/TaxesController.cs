@@ -11,11 +11,9 @@ namespace Taxes.Api.Controllers
     public class TaxesController : ControllerBase
     {
         TaxesManager TaxesManager { get; set; }
-        private readonly IValidator validator;
-        public TaxesController(TaxesContext context, IValidator validator)
+        public TaxesController(TaxesManager manager)
         {
-            this.validator = validator;
-            TaxesManager = new TaxesManager(context, validator);
+            TaxesManager = manager;
         }
 
         // Returns tax specified municipality and day
